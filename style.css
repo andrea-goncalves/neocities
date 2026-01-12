@@ -236,6 +236,43 @@ mark{
   box-shadow: inset 13px 0 6px -10px rgb(66 66 66 / 30%), inset -13px 0 6px -10px rgb(66 66 66 / 30%), inset 0 13px 6px -10px #f0f0f0, inset 0 0 0 -10px rgb(66 66 66 / 30%);
 }
 
+/* Ensure the image inside .navi fits the box and doesn't overlap the buttons */
+.navi img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 120px; /* keep image from exceeding container */
+  object-fit: cover;
+}
+
+.navi a {
+  display: block;
+  margin-top: 6px;
+}
+
+.navi button {
+  width: calc(100% - 6px);
+  margin: 0 3px 6px;
+  position: relative;
+  z-index: 2; /* ensure buttons sit above later-positioned elements */
+}
+
+/* Reduce vertical space inside buttons and align their icon */
+.navi button {
+  padding: 4px 10px; /* smaller vertical padding */
+  line-height: 1; /* keep text tight */
+  display: flex;
+  align-items: center; /* vertically center icon and text */
+  justify-content: flex-start;
+}
+
+.navi button img {
+  height: 16px;
+  width: auto;
+  margin-right: 6px;
+  display: inline-block;
+}
+
 button {
   border-radius: 50px;
   border: 2px solid black;
@@ -259,18 +296,23 @@ button {
   position: relative;
   top: -36.75em;
   left: 595px;
+  padding: 0.6em; /* use internal padding instead of child margins */
+  box-sizing: border-box;
 }
 
 .imagemask {
   background-image: url("https://cute-images.carrd.co/assets/images/image02.jpg?v=a60ca5ac");
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 2em;
-  font-weight:bold;
+  font-size: 1.1em; /* reduced to avoid vertical wrapping */
+  font-weight: bold;
   font-family: SakeMoru;
-  margin-bottom:5px;
-  width:fit-content;
-  margin:0 auto; /* this is to center, if needed */
+  margin-bottom: 5px;
+  display: inline-block; /* keep text on single line */
+  white-space: nowrap; /* prevent letter/word wrapping */
+  max-width: 100%;
+  text-align: center;
+  margin: 0 auto; /* center within parent */
   /* add below if you want an outline, if not remove */
   filter: drop-shadow(0px 1px black) drop-shadow(0 -1px black) drop-shadow(1px 0 black) drop-shadow(-1px 0 black);
 }
@@ -285,8 +327,9 @@ button {
   box-shadow: inset 10px 0px 6px -10px rgba(66,66,66,0.565), inset -10px 0px 6px -10px rgba(66,66,66,0.565), inset 0px 10px 6px -10px #ffffff, inset 0px -10px 6px -10px rgba(255, 255, 255,0.76);
   -webkit-filter: drop-shadow(0px 0px 1px black);
   -webkit-text-stroke: 0.5px black;
-  width: 15em;
-  margin-left: 17px;
+  width: 100%;
+  margin: 0; /* fit inside .comm padding */
+  box-sizing: border-box;
 }
 
 .bottom {
@@ -297,11 +340,12 @@ button {
   -webkit-filter: drop-shadow(0px 0px 1px black);
   font-family: pixel;
   color: black;
-  width: 14.2em;
-  margin-left: 17px;
+  width: 100%;
+  margin: 0; /* fit inside .comm padding */
   height: 7em;
   line-height: 1.375em;
-  overflow-y: scroll;
+  overflow-y: auto;
+  box-sizing: border-box;
 }
 
 hello {
